@@ -1,7 +1,7 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const dns = require('dns');
 dns.setServers(["1.1.1.1" , "8.8.8.8"]);
-const client = new MongoClient("mongodb+srv://satyajeetsahu53_db_user:QzG082RMdBd2ptHY@cluster0.1aoszdj.mongodb.net/?appName=Cluster0", {
+const client = new MongoClient("mongodb+srv://satyajeetsahu53_db_user:<db_password>@cluster0.1aoszdj.mongodb.net/?appName=Cluster0", {
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
