@@ -1,31 +1,35 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require('mongoose');
 const dns = require('dns');
-dns.setServers(["1.1.1.1" , "8.8.8.8"]);
-const client = new MongoClient("mongodb+srv://satyajeetsahu53_db_user:<db_password>@cluster0.1aoszdj.mongodb.net/?appName=Cluster0", {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
+
+
+// Set DNS servers
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
+
+// ✅ Define schema OUTSIDE
+const userSchema = new mongoose.Schema({
+    Name : {
+        String,
+        required : [true],
+        unique : true,
     },
+    Age: String,
+    Class: String
 });
 
-let collection;
-
-// DB connect function
+// ✅ Create model after schema
+const User = mongoose.model('User', userSchema);
+// DB Connection
 const connectDB = async () => {
     try {
-        await client.connect();
-        console.log("Database connected successfully");
-
-        const database = client.db('School');
-        collection = database.collection('students');
+        await mongoose.connect(
+            'mongodb+srv://satyajeetsahu53_db_user:QzG082RMdBd2ptHY@cluster0.1aoszdj.mongodb.net/School'
+        );
+        console.log("MongoDB Connected to School DB");
 
     } catch (error) {
-        console.error("Database connection failed:", error);
+        console.error("DB Connection Error:", error);
+        process.exit(1);
     }
 };
 
-// collection getter
-const getCollection = () => collection;
-
-module.exports = { connectDB, getCollection };
+module.exports = { connectDB, User };
