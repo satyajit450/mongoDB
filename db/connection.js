@@ -46,7 +46,7 @@ const connectDB = async () => {
 // const updateDoc = async () => {
 //     try {
 //         const result = await User.updateOne(
-//             { Name: "Ayu" }, // filter
+//             { Name: "Look" }, // filter
 //             { $set: {Name : "Satya" } } // update
 //         );
 
