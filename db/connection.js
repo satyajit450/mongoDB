@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dns = require('dns');
+const validator = require('validator')
 
 // Set DNS servers
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
@@ -11,7 +12,16 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    Age: String,
+    Age: {
+        type : String,
+        validate : {
+            validator : (value) => {
+                return validator.isInt(value , {min : 1, max :120})
+            },
+            message : 'Input age from 1 to 120'
+        }
+
+    },
     Class: String,
     // validate : {
     //     validator : function(value) {
