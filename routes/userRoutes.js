@@ -5,13 +5,14 @@ const { User } = require('../db/connection');
 
 router.post('/submit', async (req, res) => {
     try {
-        const { name, age, class: studentClass } = req.body;
+        const { name, age, class: studentClass, gender } = req.body;
 
         // ✅ Use Mongoose model
         await User.create({
             Name: name,
             Age: parseInt(age),
-            Class: studentClass
+            Class: studentClass,
+            Gender : gender
         });
 
         res.send("Data saved ✅");
